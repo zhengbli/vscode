@@ -17,6 +17,7 @@ export interface ITypescriptServiceClientHost {
 export interface ITypescriptServiceClient {
 	asAbsolutePath(resource: Uri): string;
 	asUrl(filepath: string): Uri;
+	
 
 	trace: boolean;
 

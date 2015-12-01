@@ -125,7 +125,7 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 		this.servicePromise = new Promise<cp.ChildProcess>((resolve, reject) => {
 			try {
 				let options: electron.IForkOptions = {
-					execArgv: [] //[`--debug-brk=5859`]
+					execArgv: [`--debug=6004`]
 				};
 				let value = process.env.TSS_DEBUG;
 				if (value) {

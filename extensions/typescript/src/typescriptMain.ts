@@ -33,12 +33,14 @@ export function activate(context: ExtensionContext): void {
 
 	let MODE_ID_TS = 'typescript';
 	let MODE_ID_TSX = 'typescriptreact';
+	let MODE_ID_JS = 'typescriptsalsa';
 	let MY_PLUGIN_ID = 'vs.language.typescript';
 
 	let clientHost = new TypeScriptServiceClientHost();
 	let client = clientHost.serviceClient;
 	// Register the supports for both TS and TSX so that we can have separate grammars but share the mode
 	client.onReady().then(() => {
+		registerSupports(MODE_ID_JS, clientHost, client);
 		registerSupports(MODE_ID_TS, clientHost, client);
 		registerSupports(MODE_ID_TSX, clientHost, client);
 	}, () => {

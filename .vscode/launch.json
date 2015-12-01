@@ -28,6 +28,12 @@
 			"outDir": "out"
 		},
 		{
+			"name": "Attach to Server",
+			"type": "node",
+			"request": "attach",
+			"port": 6004
+		},
+		{
 			"name": "VSCode API Tests",
 			"type": "extensionHost",
 			"request": "launch",

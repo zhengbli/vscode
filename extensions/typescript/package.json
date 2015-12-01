@@ -14,7 +14,8 @@
 	},
 	"activationEvents": [
 		"onLanguage:typescript",
-		"onLanguage:typescriptreact"
+		"onLanguage:typescriptreact",
+		"onLanguage:typescriptsalsa"
 	],
 	"main": "./out/typescriptMain",
 	"contributes": {
@@ -31,6 +32,17 @@
 				]
 			},
 			{
+				"id": "typescriptsalsa",
+				"aliases": [
+					"TypeScript Salsa",
+					"js",
+					"typescriptsalsa"
+				],
+				"extensions": [
+					".js"
+				]
+			},
+			{
 				"id": "typescriptreact",
 				"aliases": [
 					"TypeScript React",
@@ -44,6 +56,11 @@
 		"grammars": [
 			{
 				"language": "typescript",
+				"scopeName": "source.ts",
+				"path": "./syntaxes/TypeScript.tmLanguage"
+			},
+			{
+				"language": "typescriptsalsa",
 				"scopeName": "source.ts",
 				"path": "./syntaxes/TypeScript.tmLanguage"
 			},
