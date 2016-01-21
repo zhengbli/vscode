@@ -1,21 +1,21 @@
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
+Copyright (c) Microsoft Corporation. All rights reserved. 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
 /// <reference path="lib.core.d.ts" />
 /////////////////////////////
-/// ECMAScript Internationalization API
+/// ECMAScript Internationalization API 
 /////////////////////////////
 
 declare module Intl {
@@ -158,14 +158,14 @@ interface String {
 
 interface Number {
     /**
-      * Converts a number to a string by using the current or specified locale.
+      * Converts a number to a string by using the current or specified locale. 
       * @param locales An array of locale strings that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
     toLocaleString(locales?: string[], options?: Intl.NumberFormatOptions): string;
 
     /**
-      * Converts a number to a string by using the current or specified locale.
+      * Converts a number to a string by using the current or specified locale. 
       * @param locale Locale tag. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
@@ -174,41 +174,41 @@ interface Number {
 
 interface Date {
     /**
-      * Converts a date and time to a string by using the current or specified locale.
+      * Converts a date and time to a string by using the current or specified locale.  
       * @param locales An array of locale strings that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
     toLocaleString(locales?: string[], options?: Intl.DateTimeFormatOptions): string;
     /**
-      * Converts a date to a string by using the current or specified locale.
+      * Converts a date to a string by using the current or specified locale.  
       * @param locales An array of locale strings that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
     toLocaleDateString(locales?: string[], options?: Intl.DateTimeFormatOptions): string;
 
     /**
-      * Converts a time to a string by using the current or specified locale.
+      * Converts a time to a string by using the current or specified locale.  
       * @param locale Locale tag. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
     toLocaleTimeString(locale?: string[], options?: Intl.DateTimeFormatOptions): string;
-
+    
     /**
-      * Converts a date and time to a string by using the current or specified locale.
+      * Converts a date and time to a string by using the current or specified locale.  
       * @param locale Locale tag. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
     toLocaleString(locale?: string, options?: Intl.DateTimeFormatOptions): string;
-
+    
     /**
-      * Converts a date to a string by using the current or specified locale.
+      * Converts a date to a string by using the current or specified locale.  
       * @param locale Locale tag. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
     toLocaleDateString(locale?: string, options?: Intl.DateTimeFormatOptions): string;
 
     /**
-      * Converts a time to a string by using the current or specified locale.
+      * Converts a time to a string by using the current or specified locale.  
       * @param locale Locale tag. If you omit this parameter, the default locale of the JavaScript runtime is used.
       * @param options An object that contains one or more properties that specify comparison options.
       */
@@ -528,7 +528,7 @@ interface IDBDatabase extends EventTarget {
     onerror: (ev: Event) => any;
     version: string;
     close(): void;
-    createObjectStore(name: string, optionalParameters?: any): IDBObjectStore;
+    createObjectStore(name: string, optionalParameters?: IDBObjectStoreParameters): IDBObjectStore;
     deleteObjectStore(name: string): void;
     transaction(storeNames: any, mode?: string): IDBTransaction;
     addEventListener(type: "abort", listener: (ev: Event) => any, useCapture?: boolean): void;
@@ -553,10 +553,11 @@ declare var IDBFactory: {
 }
 
 interface IDBIndex {
-    keyPath: string;
+    keyPath: string | string[];
     name: string;
     objectStore: IDBObjectStore;
     unique: boolean;
+    multiEntry: boolean;
     count(key?: any): IDBRequest;
     get(key: any): IDBRequest;
     getKey(key: any): IDBRequest;
@@ -593,7 +594,7 @@ interface IDBObjectStore {
     add(value: any, key?: any): IDBRequest;
     clear(): IDBRequest;
     count(key?: any): IDBRequest;
-    createIndex(name: string, keyPath: string, optionalParameters?: any): IDBIndex;
+    createIndex(name: string, keyPath: string | string[], optionalParameters?: IDBIndexParameters): IDBIndex;
     delete(key: any): IDBRequest;
     deleteIndex(indexName: string): void;
     get(key: any): IDBRequest;
@@ -677,18 +678,16 @@ declare var IDBVersionChangeEvent: {
 }
 
 interface ImageData {
-    data: number[];
+    data: Uint8ClampedArray;
     height: number;
     width: number;
 }
 
-interface ImageDataConstructor {
+declare var ImageData: {
     prototype: ImageData;
     new(width: number, height: number): ImageData;
     new(array: Uint8ClampedArray, width: number, height: number): ImageData;
 }
-
-declare var ImageData: ImageDataConstructor;
 
 interface MSApp {
     clearTemporaryWebDataAsync(): MSAppAsyncOperation;
@@ -1109,6 +1108,16 @@ interface WorkerUtils extends Object, WindowBase64 {
     setImmediate(handler: any, ...args: any[]): number;
     setInterval(handler: any, timeout?: any, ...args: any[]): number;
     setTimeout(handler: any, timeout?: any, ...args: any[]): number;
+}
+
+interface IDBObjectStoreParameters {
+    keyPath?: string | string[];
+    autoIncrement?: boolean;
+}
+
+interface IDBIndexParameters {
+    unique?: boolean;
+    multiEntry?: boolean;
 }
 
 interface BlobPropertyBag {
